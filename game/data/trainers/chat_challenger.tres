@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/trainer.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "chat_challenger"
+display_name = "Twitch Chat"
+species_ids = Array[String](["ripplet", "leaflet"])
+levels = Array[int]([8, 9])
+intro_line = "Chat has entered the battle!"
+defeat_line = "GG chat..."
+controller_type = "EXTERNAL_CHAT"

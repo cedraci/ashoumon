@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Working Title RPG"
+run/main_scene="res://scenes/Overworld/Main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[autoload]
+
+DataRegistry="*res://scripts/autoload/data_registry.gd"
+SaveManager="*res://scripts/autoload/save_manager.gd"
+GameState="*res://scripts/autoload/game_state.gd"
+EncounterContext="*res://scripts/autoload/encounter_context.gd"
+TwitchChatClient="*res://scripts/autoload/twitch_chat_client.gd"
+
+[display]
+
+window/size/viewport_width=240
+window/size/viewport_height=160
+window/size/window_width_override=960
+window/size/window_height_override=640
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/trainer.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "ranger_vale"
+display_name = "Ranger Vale"
+species_ids = Array[String](["ripplet", "leaflet"])
+levels = Array[int]([8, 9])
+intro_line = "Ranger Vale: Let's see what you've got!"
+defeat_line = "Ranger Vale: You've got real skill..."

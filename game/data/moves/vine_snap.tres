@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/move.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "vine_snap"
+display_name = "Vine Snap"
+type_id = "grass"
+power = 40
+accuracy = 100
+priority = 0

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "leaflet"
+display_name = "Leaflet"
+base_hp = 45
+base_attack = 50
+base_defense = 55
+base_speed = 40
+type_id = "grass"
+catch_rate = 45

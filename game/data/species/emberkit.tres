@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "emberkit"
+display_name = "Emberkit"
+base_hp = 40
+base_attack = 55
+base_defense = 40
+base_speed = 60
+type_id = "fire"
+catch_rate = 45
