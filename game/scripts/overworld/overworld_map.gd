@@ -13,6 +13,7 @@ const OBSTACLES := [
 	Rect2i(5, 3, 3, 3),
 	Rect2i(12, 8, 4, 2),
 	Rect2i(20, 12, 5, 4),
+	Rect2i(7, 12, 3, 3),  # Pokémon Center footprint — see Task 5 for the building/nurse placement
 ]
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
