@@ -6,10 +6,14 @@ extends Node2D
 @onready var text_box := $TextBox
 @onready var menu_list := $UILayer/MenuList
 @onready var player := $Player
-@onready var nurse_npc := $NurseNPC
 
 func _ready() -> void:
-	nurse_npc.setup(text_box, menu_list, player)
+	# NPCs add themselves to "interactable" in their own _ready(), and Godot runs a
+	# child's _ready() before its parent's - so by the time this runs, every NPC in
+	# the scene is already registered. Wiring them generically means a new NPC just
+	# works instead of needing another hardcoded line here.
+	for npc in get_tree().get_nodes_in_group("interactable"):
+		npc.setup(text_box, menu_list, player)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:

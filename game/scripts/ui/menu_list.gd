@@ -4,6 +4,12 @@ extends Panel
 signal item_selected(index: int)
 signal cancelled()
 
+## Index reported through `item_selected` when the player backs out with ui_cancel,
+## so `await item_selected` always resolves. Callers MUST check for it before
+## indexing an array with the result - GDScript arrays accept negative indices,
+## so `items[-1]` would silently pick the last entry instead of erroring.
+const CANCELLED := -1
+
 const NORMAL_COLOR := Color(1, 1, 1)
 const SELECTED_COLOR := Color(1, 0.85, 0.2)
 
@@ -71,3 +77,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_active = false
 		get_viewport().set_input_as_handled()
 		cancelled.emit()
+		# Also resolve `item_selected` with the CANCELLED sentinel: every caller
+		# awaits `item_selected` alone, so emitting only `cancelled` would leave
+		# those coroutines suspended forever (menu stuck open, player stuck frozen).
+		item_selected.emit(CANCELLED)

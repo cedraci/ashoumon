@@ -40,8 +40,8 @@ character.
 | Key | What it does |
 |---|---|
 | **Arrow keys** | Walk around |
-| **Enter** or **Space** | Confirm a menu choice / advance dialogue text |
-| **Escape** | Cancel, and in the overworld, a shortcut that starts a random wild battle |
+| **Enter** or **Space** | Talk to someone / confirm a menu choice / advance dialogue text |
+| **Escape** | Back out of a menu without choosing (in a battle menu it takes you back a step; at the nurse's question it counts as "No") |
 | **↑ / ↓** | Move the selection cursor up/down in any menu |
 
 There are also a few **developer shortcut keys**, since the game doesn't have
@@ -54,22 +54,26 @@ game built out first:
 | **F5** | Save your game right now |
 | **F9** | Load your last save |
 | **T** | Jump straight into a battle against "Ranger Vale," a computer-controlled trainer with two creatures |
-| **C** | Jump straight into a battle against "Twitch Chat" — a trainer whose moves are chosen by chat votes (explained in section 8) |
+| **C** | Jump straight into a battle against "Twitch Chat" — a trainer whose moves are chosen by chat votes (explained in section 10) |
 
 ---
 
 ## 4. Walking around
 
-You control a small blue square (a placeholder for a real character sprite —
-no art has been made yet). Walking into the grey blocks is blocked, just like
-walls; everything else is open grass. The camera follows you and won't show
-past the edge of the test area.
+You control a small trainer character — green cap, tan shirt. The ground is
+textured grass; the leafy tree tiles around the edge of the area and dotted
+through the middle are solid, so you can't walk through them. The camera
+follows you and won't show past the edge of the test area. All of this is
+original pixel art made for this project — early and simple, but real art
+rather than placeholder boxes.
 
-Somewhere in the grass is an **encounter zone** — step into that patch and
-stand there for a moment, and there's a chance a wild creature will jump out
-and start a battle, the same way tall grass works in games like this. You
-don't need to find it exactly — the Escape key shortcut triggers the same
-kind of battle instantly for testing.
+Somewhere in the grass is an **encounter zone**, marked by a patch of taller
+grass — step into it and stand there for a moment, and there's a chance a wild
+creature will jump out and start a battle, the same way tall grass works in
+games like this.
+
+There's also a small red-roofed building in the field: that's the **Pokémon
+Center**, where you can heal your team for free. See section 8.
 
 ---
 
@@ -108,14 +112,15 @@ Battles are turn-based. Each round:
 
 1. You pick an action from a menu (explained below).
 2. The opponent picks theirs (either a computer opponent, or Twitch chat —
-   see section 8).
+   see section 10).
 3. Whichever creature is faster acts first.
 4. Damage is calculated based on the move's power, the attacker's stats, and
    the type match-up (see section 5) — you'll see "**It's super effective!**"
    or "**It's not very effective...**" messages when the type match-up
    matters.
 5. If a creature's HP hits 0, it faints. If that empties one side's whole
-   team, the battle ends.
+   team, the battle ends. Damage carries over into the next battle — see
+   section 8 for how to heal up.
 
 ### Your battle menu
 
@@ -125,6 +130,10 @@ Battles are turn-based. Each round:
   for the odds.
 - **Run** — only appears against *wild* creatures. Trainer battles can't be
   fled from, same as the classic games.
+
+Pressing **Escape** in a battle menu backs you out one step: from the move list
+it returns you to Fight/Catch/Run, and from that top menu it simply re-opens it,
+since somebody has to take a turn.
 
 Text messages during battle (like "Emberkit used Ember!") play out at a
 typewriter speed — press Enter/Space to skip ahead if you don't want to wait,
@@ -149,7 +158,33 @@ your team immediately (as long as you have a free slot out of your 6).
 
 ---
 
-## 8. Trainer battles
+## 8. Healing up: the Pokémon Center
+
+Damage sticks around after a battle — winning a fight doesn't patch your team
+back up. There are two ways to get your creatures back to full HP.
+
+**The Pokémon Center.** The red-roofed building in the field has a **nurse**
+standing in front of it — white cap with a red cross, white dress. Walk up to
+her so you're facing her, then press **Enter** or **Space** (the same button
+you use to advance dialogue and confirm menu choices). She'll greet you and
+ask whether you'd like her to heal your party:
+
+- Choose **Yes** and your whole team is restored to full HP immediately, free,
+  as many times as you like.
+- Choose **No** (or press **Escape** to back out — it counts the same as "No")
+  and she'll wave you off; nothing changes.
+
+**Losing a battle.** If every creature on your team faints, you lose the battle
+and get sent back to the overworld — and your party is automatically healed on
+the way out. So losing isn't a dead end: you can't get permanently stuck with
+a team that can't fight. (This is a stand-in for the classic "you black out and
+wake up at the last Center" rule; there's no fainting-costs-you-money penalty
+yet.) Note the healing only happens on a *loss* — after a win you keep whatever
+damage you took, which is exactly what the Center is there for.
+
+---
+
+## 9. Trainer battles
 
 Unlike wild encounters, trainer battles are against an opponent with a full
 lineup of creatures (right now, two). When one of their creatures faints,
@@ -163,7 +198,7 @@ walking up to them in the world.
 
 ---
 
-## 9. The Twitch chat feature
+## 10. The Twitch chat feature
 
 This is the headline feature: instead of a computer deciding the opponent
 trainer's moves, **the moves can be decided by a live Twitch chat vote** —
@@ -201,7 +236,7 @@ this feature could exist at all.
 
 ---
 
-## 10. Saving and loading
+## 11. Saving and loading
 
 Press **F5** at any time in the overworld to save. Press **F9** to load your
 last save. Your save keeps track of:
@@ -217,16 +252,20 @@ tied to a direct key press for now.
 
 ---
 
-## 11. What's *not* built yet (so you know what to expect)
+## 12. What's *not* built yet (so you know what to expect)
 
 Being upfront about the current limitations:
 
-- **No real art** — everyone is a colored square. Sprites, tiles, and music
-  are all placeholders.
+- **Early art, and no sound at all** — there are now real pixel-art sprites for
+  the player, the nurse, all three creatures, the map tiles, the Pokémon Center
+  and the battle backdrop, plus a proper themed menu/dialogue style. It's a
+  first pass, though: nothing is animated, the characters don't turn to face the
+  way they're walking, and there is no music or sound effects yet.
 - **No Nuzlocke rules active yet** — permadeath, one-catch-per-area, and
   mandatory nicknames are all planned but switched off for now.
-- **No real trainer NPCs in the world** — trainers are triggered by
-  developer shortcut keys (T and C) instead of walking up to a character.
+- **No trainer NPCs in the world yet** — the nurse is the only character you
+  can walk up to and talk to. Trainer battles are still triggered by developer
+  shortcut keys (T and C) instead of by meeting someone in the world.
 - **No title screen or pause menu** — the game boots straight into the
   playable area.
 - **Only one small test area, three creatures, two trainers, and four moves**

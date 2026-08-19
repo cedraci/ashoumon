@@ -92,6 +92,15 @@ func start_battle(p_player_party: Array, p_enemy_party: Array, p_player_controll
 	enemy_controller = p_enemy_controller
 	player_active = _next_active(player_party)
 	enemy_active = _next_active(enemy_party)
+	if player_active == null or enemy_active == null:
+		# One side has no usable member at all (empty party, a stale save where
+		# everyone is fainted, or species that failed to resolve). Bail out instead
+		# of nil-dereferencing in _apply_tints()/_update_hud(), which would abort the
+		# setup chain and leave the battle screen silently frozen.
+		push_warning("BattleState: a party has no usable members; ending the battle immediately.")
+		text_box.say(["There's nobody able to battle!"])
+		battle_ended.emit("enemy" if player_active == null else "player")
+		return
 	_apply_tints()
 	_update_hud()
 	_run_battle()
@@ -129,6 +138,8 @@ func hide_vote_countdown() -> void:
 	_vote_countdown_token += 1
 	vote_label.visible = false
 
+## Returns the chosen index, or -1 (MenuList.CANCELLED) if the player backed out
+## with ui_cancel. Callers must check for -1 before using it as an array index.
 func show_menu(items: Array) -> int:
 	menu_list.set_items(items)
 	menu_list.open()
