@@ -18,6 +18,10 @@ const PALETTE = {
 	HAIR: [92, 62, 42, 255],
 };
 
+const CAP_WHITE = [245, 240, 232, 255];
+const CROSS_RED = [196, 74, 62, 255];
+const DRESS_WHITE = [245, 240, 232, 255];
+
 // --- Overworld player: simple original front-facing trainer, 16x16. -----------------
 function paintPlayer(x, y) {
 	// Cap (rows 1-3): brim + crown, forest-green to match the region's palette.
@@ -44,6 +48,34 @@ function paintPlayer(x, y) {
 		if ((x >= 6 && x <= 7) || (x >= 8 && x <= 9)) return PALETTE.HAIR;
 	}
 	if (y === 14 && x >= 5 && x <= 10) return PALETTE.OUTLINE; // shoes
+	return null;
+}
+
+// --- Nurse NPC: same body plan as the player sprite, white cap+dress, small red
+// cross on the cap. 16x16.
+function paintNurse(x, y) {
+	// Red cross on the cap — checked first so it overrides the cap fill beneath it.
+	if (x === 7 && (y === 1 || y === 2)) return CROSS_RED;
+	if (y === 2 && (x === 6 || x === 8)) return CROSS_RED;
+	// Cap (rows 1-3)
+	if (y === 1 && x >= 5 && x <= 10) return PALETTE.OUTLINE;
+	if (y === 2 && x >= 4 && x <= 11) return (x === 4 || x === 11) ? PALETTE.OUTLINE : CAP_WHITE;
+	if (y === 3 && x >= 5 && x <= 10) return CAP_WHITE;
+	// Face (rows 4-6)
+	if (y >= 4 && y <= 6) {
+		if (x === 5 || x === 10) return PALETTE.OUTLINE;
+		if (x >= 6 && x <= 9) return PALETTE.SKIN;
+	}
+	if (y === 5 && (x === 6 || x === 9)) return PALETTE.OUTLINE; // eyes
+	// Dress (rows 7-13)
+	if (y >= 7 && y <= 13) {
+		if (x === 4 || x === 11) return PALETTE.OUTLINE;
+		if (y === 10 && x >= 5 && x <= 10) return CROSS_RED; // belt accent — checked
+		// before the dress fill below so it isn't shadowed by it.
+		if (x >= 5 && x <= 10) return DRESS_WHITE;
+	}
+	// Shoes (row 14)
+	if (y === 14 && x >= 5 && x <= 10) return PALETTE.OUTLINE;
 	return null;
 }
 
@@ -136,6 +168,10 @@ function makeCreature(topperFn, fileName) {
 const player = new Canvas(16, 16);
 player.forEach((x, y, c) => { const col = paintPlayer(x, y); if (col) c.setPixel(x, y, col); });
 player.writePNG(path.join(OUT_DIR, 'player_overworld.png'));
+
+const nurse = new Canvas(16, 16);
+nurse.forEach((x, y, c) => { const col = paintNurse(x, y); if (col) c.setPixel(x, y, col); });
+nurse.writePNG(path.join(OUT_DIR, 'nurse_npc.png'));
 
 makeCreature(roundEars, 'creature_placeholder.png');
 makeCreature(pointedEars, 'emberkit.png');
