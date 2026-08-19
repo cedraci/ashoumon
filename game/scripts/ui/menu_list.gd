@@ -8,6 +8,7 @@ const NORMAL_COLOR := Color(1, 1, 1)
 const SELECTED_COLOR := Color(1, 0.85, 0.2)
 
 @onready var list_container: VBoxContainer = $MarginContainer/VBoxContainer
+@onready var cursor: TextureRect = $Cursor
 
 var _items: Array = []
 var _labels: Array = []
@@ -22,6 +23,7 @@ func set_items(items: Array) -> void:
 	for item_text in _items:
 		var lbl := Label.new()
 		lbl.text = item_text
+		lbl.add_theme_font_size_override("font_size", 9)
 		list_container.add_child(lbl)
 		_labels.append(lbl)
 	_selected = 0
@@ -34,15 +36,21 @@ func open() -> void:
 	visible = true
 	_active = true
 	_selected = 0
+	cursor.visible = not _labels.is_empty()
 	_update_highlight()
 
 func close() -> void:
 	visible = false
 	_active = false
+	cursor.visible = false
 
 func _update_highlight() -> void:
 	for i in range(_labels.size()):
 		_labels[i].modulate = SELECTED_COLOR if i == _selected else NORMAL_COLOR
+	if not _labels.is_empty():
+		var target: Label = _labels[_selected]
+		cursor.position = target.position + list_container.position \
+			+ Vector2(-8.0, (target.size.y - cursor.size.y) / 2.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not _active or _items.is_empty():

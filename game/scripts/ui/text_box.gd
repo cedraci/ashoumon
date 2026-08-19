@@ -6,7 +6,7 @@ signal finished
 const CHARS_PER_SECOND := 40.0
 
 @onready var label: RichTextLabel = $Panel/MarginContainer/Label
-@onready var indicator: Label = $Panel/ContinueIndicator
+@onready var indicator: TextureRect = $Panel/ContinueIndicator
 
 var _queue: Array = []
 var _typing := false
