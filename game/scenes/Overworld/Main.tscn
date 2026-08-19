@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/Overworld/OverworldMap.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
@@ -6,11 +6,20 @@
 [ext_resource type="PackedScene" path="res://scenes/UI/TextBox.tscn" id="4_textbox"]
 [ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="5_menu"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/EncounterZone.tscn" id="6_encounter"]
+[ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="7_building_tex"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="8_nurse"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_script")
 
 [node name="OverworldMap" parent="." instance=ExtResource("1_map")]
+
+[node name="PokeCenterBuilding" type="Sprite2D" parent="."]
+position = Vector2(136, 216)
+texture = ExtResource("7_building_tex")
+
+[node name="NurseNPC" parent="." instance=ExtResource("8_nurse")]
+position = Vector2(136, 248)
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(240, 160)
