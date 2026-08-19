@@ -9,3 +9,4 @@ extends Resource
 @export var base_speed: int
 @export var type_id: String
 @export var catch_rate: int = 45
+@export var sprite_path: String = "res://assets/sprites/creature_placeholder.png"

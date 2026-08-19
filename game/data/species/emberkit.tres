@@ -12,3 +12,4 @@ base_defense = 40
 base_speed = 60
 type_id = "fire"
 catch_rate = 45
+sprite_path = "res://assets/sprites/emberkit.png"

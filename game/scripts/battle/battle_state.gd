@@ -103,6 +103,8 @@ func _next_active(party: Array) -> BattleCombatant:
 	return null
 
 func _apply_tints() -> void:
+	player_sprite.texture = load(player_active.species.sprite_path)
+	enemy_sprite.texture = load(enemy_active.species.sprite_path)
 	player_sprite.modulate = TYPE_TINTS.get(player_active.species.type_id, Color.WHITE)
 	enemy_sprite.modulate = TYPE_TINTS.get(enemy_active.species.type_id, Color.WHITE)
 

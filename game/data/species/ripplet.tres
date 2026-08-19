@@ -12,3 +12,4 @@ base_defense = 50
 base_speed = 45
 type_id = "water"
 catch_rate = 45
+sprite_path = "res://assets/sprites/ripplet.png"
