@@ -10,6 +10,9 @@ var _text_box
 var _menu_list
 var _player
 
+func _ready() -> void:
+	add_to_group("interactable")
+
 func setup(text_box, menu_list, player) -> void:
 	_text_box = text_box
 	_menu_list = menu_list
