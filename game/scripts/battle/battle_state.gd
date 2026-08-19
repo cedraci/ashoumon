@@ -77,7 +77,9 @@ func _starter_move_for(species: Species) -> Move:
 		_:
 			return load("res://data/moves/tackle.tres")
 
-func _on_battle_ended(_result: String) -> void:
+func _on_battle_ended(result: String) -> void:
+	if result == "enemy":
+		GameState.heal_party()
 	EncounterContext.pending_wild_species = null
 	EncounterContext.pending_trainer = null
 	await get_tree().create_timer(2.0).timeout

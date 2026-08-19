@@ -25,3 +25,7 @@ func add_to_party(combatant: BattleCombatant) -> bool:
 		return false
 	party.append(combatant)
 	return true
+
+func heal_party() -> void:
+	for member in party:
+		member.current_hp = member.max_hp
