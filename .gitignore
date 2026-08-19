@@ -10,3 +10,6 @@ export_credentials.cfg
 # OS junk
 .DS_Store
 Thumbs.db
+
+# Throwaway verification screenshots (see docs/superpowers/plans)
+/.debug_output/
