@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="1_building"]
-[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="2_nurse"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="2_door"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_upper"]
 size = Vector2(48, 20)
@@ -32,5 +32,8 @@ shape = SubResource("RectangleShape2D_left")
 position = Vector2(15, -20)
 shape = SubResource("RectangleShape2D_right")
 
-[node name="Nurse" parent="." instance=ExtResource("2_nurse")]
-position = Vector2(0, 0)
+[node name="Entrance" parent="." instance=ExtResource("2_door")]
+position = Vector2(0, 10)
+transition_on_touch = true
+destination_scene = "res://scenes/Overworld/PokemonCenterInterior.tscn"
+destination_position = Vector2(120, 128)

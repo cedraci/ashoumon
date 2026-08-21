@@ -26,5 +26,7 @@ func _ready() -> void:
 	tile_map_layer.tile_set = tile_set
 	for y in range(HEIGHT):
 		for x in range(WIDTH):
-			var border := x == 0 or y == 0 or x == WIDTH - 1 or y == HEIGHT - 1
+			var exit_x := int(WIDTH / 2)
+			var is_exit_gap := x == exit_x and y == HEIGHT - 1
+			var border := (x == 0 or y == 0 or x == WIDTH - 1 or y == HEIGHT - 1) and not is_exit_gap
 			tile_map_layer.set_cell(Vector2i(x, y), source_id, Vector2i(1, 0) if border else Vector2i(2, 0))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/Overworld/OverworldMap.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="5_menu"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/EncounterZone.tscn" id="6_encounter"]
 [ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="7_building"]
-[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="8_nurse"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="8_door"]
 [ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="9_start_menu"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="10_exit"]
 
@@ -20,8 +20,11 @@ script = ExtResource("3_script")
 position = Vector2(136, 216)
 texture = ExtResource("7_building")
 
-[node name="NurseNPC" parent="." instance=ExtResource("8_nurse")]
+[node name="CenterEntrance" parent="." instance=ExtResource("8_door")]
 position = Vector2(136, 248)
+transition_on_touch = true
+destination_scene = "res://scenes/Overworld/PokemonCenterInterior.tscn"
+destination_position = Vector2(120, 128)
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(240, 160)

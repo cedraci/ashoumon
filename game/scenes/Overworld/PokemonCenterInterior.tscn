@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/overworld/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/overworld/pokemon_center_interior.gd" id="2_room"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="4_door"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="5_nurse"]
+[ext_resource type="PackedScene" path="res://scenes/UI/TextBox.tscn" id="6_textbox"]
+[ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="7_menu"]
+[ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="8_start_menu"]
+[ext_resource type="Script" path="res://scripts/overworld/center_computer.gd" id="9_computer"]
+[ext_resource type="PackedScene" path="res://scenes/UI/StorageMenu.tscn" id="10_storage"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_counter"]
+size = Vector2(160, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_computer"]
+size = Vector2(16, 16)
+
+[node name="PokemonCenterInterior" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Room" type="Node2D" parent="."]
+script = ExtResource("2_room")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Room"]
+
+[node name="Counter" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+position = Vector2(120, 56)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Counter"]
+shape = SubResource("RectangleShape2D_counter")
+
+[node name="Nurse" parent="." instance=ExtResource("5_nurse")]
+position = Vector2(120, 40)
+
+[node name="Computer" type="StaticBody2D" parent="."]
+position = Vector2(64, 92)
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("9_computer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Computer"]
+shape = SubResource("RectangleShape2D_computer")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(120, 128)
+
+[node name="ExitDoor" parent="." instance=ExtResource("4_door")]
+position = Vector2(120, 144)
+transition_on_touch = true
+# The room border has a dedicated gap behind this door so the player can leave.
+
+[node name="TextBox" parent="." instance=ExtResource("6_textbox")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="MenuList" parent="UILayer" instance=ExtResource("7_menu")]
+offset_left = 132.0
+offset_top = 56.0
+offset_right = 228.0
+offset_bottom = 120.0
+visible = false
+
+[node name="StartMenu" parent="UILayer" instance=ExtResource("8_start_menu")]
+visible = false
+
+[node name="StorageMenu" parent="UILayer" instance=ExtResource("10_storage")]
+visible = false

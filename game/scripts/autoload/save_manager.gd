@@ -11,7 +11,8 @@ func has_save() -> bool:
 func save_game() -> void:
 	var data := {
 		"version": SAVE_VERSION,
-		"party": _serialize_party(),
+		"party": _serialize_combatants(GameState.party),
+		"stored_pokemon": _serialize_combatants(GameState.stored_pokemon),
 		"bag": GameState.bag,
 		"scene_path": GameState.current_scene_path,
 		"overworld_position": [GameState.overworld_position.x, GameState.overworld_position.y],
@@ -20,9 +21,9 @@ func save_game() -> void:
 	file.store_string(JSON.stringify(data))
 	file.close()
 
-func _serialize_party() -> Array:
+func _serialize_combatants(combatants: Array) -> Array:
 	var out := []
-	for member in GameState.party:
+	for member in combatants:
 		var move_ids := []
 		for m in member.moves:
 			move_ids.append(m.id)
@@ -51,10 +52,17 @@ func load_game() -> bool:
 		return false
 	if typeof(parsed["party"]) != TYPE_ARRAY:
 		return false
-	var loaded_party = _deserialize_party(parsed["party"])
+	var loaded_party = _deserialize_combatants(parsed["party"], GameState.PARTY_LIMIT)
 	if loaded_party == null:
 		return false
 	GameState.party = loaded_party
+	var stored_entries = parsed.get("stored_pokemon", [])
+	if typeof(stored_entries) != TYPE_ARRAY:
+		return false
+	var loaded_storage = _deserialize_combatants(stored_entries)
+	if loaded_storage == null:
+		return false
+	GameState.stored_pokemon = loaded_storage
 	if typeof(parsed.get("bag", {})) == TYPE_DICTIONARY:
 		GameState.bag = parsed.get("bag", {}).duplicate()
 	var scene_path = parsed.get("scene_path", "")
@@ -68,8 +76,8 @@ func load_game() -> bool:
 		GameState.overworld_position = Vector2(float(saved_position[0]), float(saved_position[1]))
 	return true
 
-func _deserialize_party(entries: Array):
-	if entries.size() > 10:
+func _deserialize_combatants(entries: Array, max_count: int = -1):
+	if max_count >= 0 and entries.size() > max_count:
 		return null
 	var party := []
 	for entry in entries:

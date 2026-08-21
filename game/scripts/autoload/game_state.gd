@@ -2,7 +2,9 @@ extends Node
 ## Holds the player's party and overworld state across scene changes.
 
 var party: Array = []  # Array of BattleCombatant
+var stored_pokemon: Array = []  # Array of BattleCombatant held by Center computers
 var bag: Dictionary = {}
+const PARTY_LIMIT := 10
 var overworld_position := Vector2(240, 160)
 var return_scene_path := "res://scenes/Overworld/Main.tscn"
 var return_position := Vector2(240, 160)
@@ -36,10 +38,16 @@ func get_lead() -> BattleCombatant:
 	return party[0] if not party.is_empty() else null
 
 func add_to_party(combatant: BattleCombatant) -> bool:
-	if party.size() >= 10:
+	if party.size() >= PARTY_LIMIT:
 		return false
 	party.append(combatant)
 	return true
+
+func add_caught_pokemon(combatant: BattleCombatant) -> String:
+	if add_to_party(combatant):
+		return "party"
+	stored_pokemon.append(combatant)
+	return "stored"
 
 func heal_party() -> void:
 	for member in party:

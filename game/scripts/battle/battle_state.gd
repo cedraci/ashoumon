@@ -223,12 +223,6 @@ func _run_turn() -> String:
 			var no_ball_enemy_action: Dictionary = await enemy_controller.choose_action(enemy_active, player_active)
 			await _execute_action(enemy_active, player_active, no_ball_enemy_action)
 			return ""
-		if GameState.party.size() >= 10:
-			text_box.say(["Your party is full!"])
-			await text_box.finished
-			var full_party_enemy_action: Dictionary = await enemy_controller.choose_action(enemy_active, player_active)
-			await _execute_action(enemy_active, player_active, full_party_enemy_action)
-			return ""
 		if not GameState.consume_ball(ball_id):
 			text_box.say(["You don't have that ball anymore!"])
 			await text_box.finished
@@ -236,10 +230,14 @@ func _run_turn() -> String:
 		text_box.say(["You threw a %s..." % CatchMechanic.get_ball_display_name(ball_id)])
 		await text_box.finished
 		if CatchMechanic.attempt_catch(enemy_active, ball_id):
-			text_box.say(["Gotcha! %s was caught!" % enemy_active.get_display_name()])
+			var catch_destination := GameState.add_caught_pokemon(enemy_active)
+			var catch_messages := ["Gotcha! %s was caught!" % enemy_active.get_display_name()]
+			if catch_destination == "stored":
+				catch_messages.append("Your party is full.")
+				catch_messages.append("%s was sent to the Center Computer." % enemy_active.get_display_name())
+			text_box.say(catch_messages)
 			await text_box.finished
 			NicknamePolicy.maybe_prompt(enemy_active)
-			GameState.add_to_party(enemy_active)
 			return "caught"
 		text_box.say(["Oh no! It broke free!"])
 		await text_box.finished
