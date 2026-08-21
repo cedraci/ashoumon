@@ -81,10 +81,18 @@ func _starter_move_for(species: Species) -> Move:
 func _on_battle_ended(result: String) -> void:
 	if result == "enemy":
 		GameState.heal_party()
+	var destination_scene := EncounterContext.return_scene_path
+	var destination_position := EncounterContext.return_position
+	if destination_scene.is_empty():
+		destination_scene = "res://scenes/Overworld/StartingMeadow.tscn"
+		destination_position = GameState.overworld_position
+	GameState.pending_scene_position = destination_position
+	GameState.pending_scene_position_valid = true
 	EncounterContext.pending_wild_species = null
 	EncounterContext.pending_trainer = null
+	EncounterContext.return_scene_path = ""
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://scenes/Overworld/Main.tscn")
+	get_tree().change_scene_to_file(destination_scene)
 
 func start_battle(p_player_party: Array, p_enemy_party: Array, p_player_controller: TrainerController, p_enemy_controller: TrainerController) -> void:
 	player_party = p_player_party
@@ -214,6 +222,12 @@ func _run_turn() -> String:
 			await text_box.finished
 			var no_ball_enemy_action: Dictionary = await enemy_controller.choose_action(enemy_active, player_active)
 			await _execute_action(enemy_active, player_active, no_ball_enemy_action)
+			return ""
+		if GameState.party.size() >= 10:
+			text_box.say(["Your party is full!"])
+			await text_box.finished
+			var full_party_enemy_action: Dictionary = await enemy_controller.choose_action(enemy_active, player_active)
+			await _execute_action(enemy_active, player_active, full_party_enemy_action)
 			return ""
 		if not GameState.consume_ball(ball_id):
 			text_box.say(["You don't have that ball anymore!"])

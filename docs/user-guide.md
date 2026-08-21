@@ -283,12 +283,12 @@ last save. Your save keeps track of:
 
 - Every creature in your team (species, level, current HP, nickname if it
   has one)
-- That's it, for now — your position in the world and any story progress
-  aren't saved yet, since there isn't really a "world" with progress to
-  track yet beyond the one test area.
+- Your Pokeball, Superball, and Hyperball counts
+- The overworld map you were on and your player position
+- That's it, for now — trainer completion and other story progress aren't
+  saved yet.
 
-There's no in-game menu for this yet (no pause screen), which is why it's
-tied to a direct key press for now.
+Saving is also available from the in-game Start Menu.
 
 ---
 
@@ -303,14 +303,14 @@ Being upfront about the current limitations:
   way they're walking, and there is no music or sound effects yet.
 - **No Nuzlocke rules active yet** — permadeath, one-catch-per-area, and
   mandatory nicknames are all planned but switched off for now.
-- **No trainer NPCs in the world yet** — the nurse is the only character you
-  can walk up to and talk to. Trainer battles are still triggered by developer
-  shortcut keys (T and C) instead of by meeting someone in the world.
-- **No title screen or pause menu** — the game boots straight into the
-  playable area.
-- **Only one small test area, three creatures, two trainers, and four moves**
-  exist so far — enough to prove every system works, not a full game's
-  worth of content yet.
+- **Some trainer battles are still developer shortcuts** — Ranger Vale and
+  Twitch Chat remain available with the T and C keys, while the connected map
+  route includes several walk-up trainer encounters.
+- **No title screen** — the game boots straight into the playable area. The
+  in-game Start Menu is available with Enter.
+- **154 species resources exist, but default encounters use only Emberkit,
+  Ripplet, and Leaflet; four moves are currently authored** — enough to prove
+  the systems work, not a full game's worth of content yet.
 - **No standalone installer/.exe** — it currently has to be launched through
   the Godot engine.
 

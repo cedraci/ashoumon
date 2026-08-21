@@ -6,14 +6,18 @@ extends Area2D
 @export var min_level := 3
 @export var max_level := 6
 
+const DEFAULT_SPECIES_IDS := ["emberkit", "ripplet", "leaflet"]
+
 var _player: Node = null
 
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	if species_pool.is_empty():
-		for species in DataRegistry.get_all_species():
-			species_pool.append(species as Species)
+		for species_id in DEFAULT_SPECIES_IDS:
+			var species: Species = DataRegistry.get_species(species_id)
+			if species != null:
+				species_pool.append(species)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	timer.timeout.connect(_on_timer_timeout)

@@ -1,12 +1,14 @@
 extends Node
-## Holds the player's party across scene changes. Not yet persisted to disk
-## (that's milestone 5's SaveManager) - lives only for the current play session.
+## Holds the player's party and overworld state across scene changes.
 
 var party: Array = []  # Array of BattleCombatant
 var bag: Dictionary = {}
 var overworld_position := Vector2(240, 160)
 var return_scene_path := "res://scenes/Overworld/Main.tscn"
 var return_position := Vector2(240, 160)
+var current_scene_path := ""
+var loaded_scene_path := ""
+var map_transition_locked := false
 var pending_scene_position := Vector2.ZERO
 var pending_scene_position_valid := false
 

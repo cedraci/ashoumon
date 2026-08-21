@@ -9,9 +9,19 @@ extends Node2D
 @onready var player := $Player
 
 func _ready() -> void:
+	var scene_path := get_tree().current_scene.scene_file_path
+	if not GameState.loaded_scene_path.is_empty() and GameState.loaded_scene_path != scene_path:
+		var saved_scene_path := GameState.loaded_scene_path
+		GameState.loaded_scene_path = ""
+		call_deferred("_load_saved_scene", saved_scene_path)
+		return
+	GameState.loaded_scene_path = ""
+	GameState.current_scene_path = scene_path
 	if GameState.pending_scene_position_valid:
 		player.global_position = GameState.pending_scene_position
 		GameState.pending_scene_position_valid = false
+		GameState.map_transition_locked = true
+		get_tree().create_timer(0.6).timeout.connect(_unlock_map_transition)
 	else:
 		player.global_position = GameState.overworld_position
 	# NPCs add themselves to "interactable" in their own _ready(), and Godot runs a
@@ -21,6 +31,12 @@ func _ready() -> void:
 	for npc in get_tree().get_nodes_in_group("interactable"):
 		npc.setup(text_box, menu_list, player)
 	start_menu.closed.connect(player.unfreeze)
+
+func _load_saved_scene(scene_path: String) -> void:
+	get_tree().change_scene_to_file(scene_path)
+
+func _unlock_map_transition() -> void:
+	GameState.map_transition_locked = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") \

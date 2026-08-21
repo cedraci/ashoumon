@@ -13,6 +13,8 @@ func save_game() -> void:
 		"version": SAVE_VERSION,
 		"party": _serialize_party(),
 		"bag": GameState.bag,
+		"scene_path": GameState.current_scene_path,
+		"overworld_position": [GameState.overworld_position.x, GameState.overworld_position.y],
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -55,6 +57,15 @@ func load_game() -> bool:
 	GameState.party = loaded_party
 	if typeof(parsed.get("bag", {})) == TYPE_DICTIONARY:
 		GameState.bag = parsed.get("bag", {}).duplicate()
+	var scene_path = parsed.get("scene_path", "")
+	if typeof(scene_path) == TYPE_STRING \
+	and (scene_path.is_empty() or scene_path.begins_with("res://scenes/Overworld/") and ResourceLoader.exists(scene_path)):
+		GameState.loaded_scene_path = scene_path
+	var saved_position = parsed.get("overworld_position", [])
+	if typeof(saved_position) == TYPE_ARRAY and saved_position.size() == 2 \
+	and typeof(saved_position[0]) in [TYPE_INT, TYPE_FLOAT] \
+	and typeof(saved_position[1]) in [TYPE_INT, TYPE_FLOAT]:
+		GameState.overworld_position = Vector2(float(saved_position[0]), float(saved_position[1]))
 	return true
 
 func _deserialize_party(entries: Array):

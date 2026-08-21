@@ -15,6 +15,8 @@ const SNOW_COORDS := Vector2i(5, 0)
 const BARRIER_COORDS := Vector2i(6, 0)
 const BRIDGE_COORDS := Vector2i(7, 0)
 
+@export var map_style := "meadow"
+
 const OBSTACLES := [
 	Rect2i(0, 0, 30, 1),
 	Rect2i(0, 19, 30, 1),
@@ -80,12 +82,12 @@ func _paint_map() -> void:
 				if rect.has_point(Vector2i(x, y)):
 					in_obstacle = true
 					break
-			var is_snow := y <= 5 and x >= 16
-			var is_water := x >= 11 and x <= 14 and y >= 2 and y <= 17 \
+			var is_snow := map_style == "trainer_road" and y <= 5 and x >= 16
+			var is_water := map_style == "trainer_road" and x >= 11 and x <= 14 and y >= 2 and y <= 17 \
 				and not (y >= 9 and y <= 10)
-			var is_bridge := x >= 11 and x <= 14 and y >= 9 and y <= 10
+			var is_bridge := map_style == "trainer_road" and x >= 11 and x <= 14 and y >= 9 and y <= 10
 			var is_path := y == 10 or x == 10 or (is_snow and y == 6)
-			var is_barrier := (x == 7 and y >= 4 and y <= 9) or (x == 17 and y >= 11 and y <= 16)
+			var is_barrier := map_style == "trainer_road" and ((x == 7 and y >= 4 and y <= 9) or (x == 17 and y >= 11 and y <= 16))
 			var is_flower := not is_path and not is_border and not in_obstacle \
 				and ((x * 7 + y * 11) % 37 == 0)
 			var coords := WALL_COORDS if (is_border or in_obstacle) \

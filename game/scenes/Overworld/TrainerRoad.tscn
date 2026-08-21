@@ -14,6 +14,7 @@
 script = ExtResource("3_script")
 
 [node name="OverworldMap" parent="." instance=ExtResource("1_map")]
+map_style = "trainer_road"
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(32, 160)
 [node name="TextBox" parent="." instance=ExtResource("4_textbox")]
@@ -33,11 +34,13 @@ trainer_path = "res://data/trainers/snow_ranger.tres"
 [node name="WestExit" parent="." instance=ExtResource("9_exit")]
 position = Vector2(32, 160)
 destination_scene = "res://scenes/Overworld/StartingMeadow.tscn"
-destination_position = Vector2(448, 160)
+destination_position = Vector2(416, 160)
+transition_on_touch = true
 [node name="TownExit" parent="." instance=ExtResource("9_exit")]
 position = Vector2(448, 160)
 destination_scene = "res://scenes/Overworld/Lumenbrook.tscn"
-destination_position = Vector2(32, 160)
+destination_position = Vector2(80, 160)
+transition_on_touch = true
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 [node name="MenuList" parent="UILayer" instance=ExtResource("5_menu")]
