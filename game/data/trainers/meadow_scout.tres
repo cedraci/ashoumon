@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/trainer.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "meadow_scout"
+display_name = "Mira, Meadow Scout"
+species_ids = Array[String](["brindleaf", "emberoo"])
+levels = Array[int]([5, 5])
+intro_line = "Mira: The meadow is full of surprises!"
+defeat_line = "Mira: I need more field practice."

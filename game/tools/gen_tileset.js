@@ -18,6 +18,10 @@ const PALETTE = {
 	SHADOW: [150, 112, 78, 255],
 	SAND: [219, 193, 133, 255],
 	SAND_DARK: [176, 140, 92, 255],
+	WATER: [72, 145, 184, 255],
+	WATER_LIGHT: [132, 207, 220, 255],
+	SNOW: [226, 238, 232, 255],
+	SNOW_SHADE: [174, 207, 211, 255],
 };
 
 function paintTile(canvas, tx, ty, painter) {
@@ -56,6 +60,28 @@ function paintFlower(x, y) {
 	return grass;
 }
 
+function paintWater(x, y) {
+	if (y === 4 || y === 11) return PALETTE.WATER_LIGHT;
+	return PALETTE.WATER;
+}
+
+function paintSnow(x, y) {
+	if ((x + y * 2) % 9 === 0) return PALETTE.SNOW_SHADE;
+	return PALETTE.SNOW;
+}
+
+function paintBarrier(x, y) {
+	if (y >= 5 && y <= 10 && x >= 2 && x <= 13) return PALETTE.SHADOW;
+	if (y === 4 || y === 11) return PALETTE.OUTLINE;
+	if (x === 2 || x === 13) return PALETTE.OUTLINE;
+	return PALETTE.SAND_DARK;
+}
+
+function paintBridge(x, y) {
+	if (x % 4 === 0) return PALETTE.OUTLINE;
+	return PALETTE.SAND_DARK;
+}
+
 // Tree: rounded dark-outlined canopy over a short trunk, on a grass background so
 // it blends with neighboring grass cells on the same TileMapLayer (this tile fully
 // replaces a cell rather than layering on top of it).
@@ -79,9 +105,13 @@ function paintTree(x, y) {
 	return paintGrass(x, y);
 }
 
-const atlas = new Canvas(TILE * 4, TILE);
+const atlas = new Canvas(TILE * 8, TILE);
 paintTile(atlas, 0, 0, paintGrass);
 paintTile(atlas, 1, 0, paintTree);
 paintTile(atlas, 2, 0, paintPath);
 paintTile(atlas, 3, 0, paintFlower);
+paintTile(atlas, 4, 0, paintWater);
+paintTile(atlas, 5, 0, paintSnow);
+paintTile(atlas, 6, 0, paintBarrier);
+paintTile(atlas, 7, 0, paintBridge);
 atlas.writePNG(OUT_FILE);

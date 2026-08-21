@@ -75,6 +75,12 @@ games like this.
 There's also a small red-roofed building in the field: that's the **Pokémon
 Center**, where you can heal your team for free. See section 8.
 
+The current route is **Frostmeadow Crossing**. Its southern meadow has tall
+grass and Mira, the Meadow Scout. A water channel and bridge divide the middle
+of the route, where Oren, the Bridge Keeper, is waiting. The northern section
+turns snowy and contains Syl, the Snow Ranger. Trees, barriers, flowers, snow,
+water, and the bridge are solid or decorative according to their tile type.
+
 ---
 
 ## 5. Your team

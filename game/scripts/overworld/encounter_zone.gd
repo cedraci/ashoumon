@@ -6,6 +6,8 @@ extends Area2D
 @export var min_level := 3
 @export var max_level := 6
 
+var _player: Node = null
+
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
@@ -18,11 +20,19 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		timer.start()
+		_player = body
+		_player.moved.connect(_on_player_moved)
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		if _player != null and _player.moved.is_connected(_on_player_moved):
+			_player.moved.disconnect(_on_player_moved)
+		_player = null
 		timer.stop()
+
+func _on_player_moved() -> void:
+	if _player != null and timer.is_stopped():
+		timer.start()
 
 func _on_timer_timeout() -> void:
 	if species_pool.is_empty():

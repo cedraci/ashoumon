@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/trainer.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "bridge_keeper"
+display_name = "Oren, Bridge Keeper"
+species_ids = Array[String](["rillip", "sparkit", "brindleaf"])
+levels = Array[int]([7, 7, 8])
+intro_line = "Oren: The bridge is earned, not given."
+defeat_line = "Oren: You crossed that battle cleanly."

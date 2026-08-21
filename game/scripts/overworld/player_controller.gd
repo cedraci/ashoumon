@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal moved
+
 const SPEED := 60.0
 const TILE_SIZE := 16.0
 
@@ -27,6 +29,8 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = input_vector * SPEED
 	move_and_slide()
+	if not _frozen and input_vector != Vector2.ZERO:
+		moved.emit()
 	GameState.overworld_position = global_position
 
 	interact_zone.position = Vector2(facing.x, facing.y) * TILE_SIZE

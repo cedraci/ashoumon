@@ -5,6 +5,7 @@ extends StaticBody2D
 
 @export var dialogue_lines: Array[String] = []
 @export var npc_type: String = "generic"
+@export_file("*.tres") var trainer_path: String = ""
 
 var _text_box
 var _menu_list
@@ -30,8 +31,16 @@ func interact() -> void:
 		return
 	if npc_type == "nurse":
 		_run_nurse_flow()
+	elif npc_type == "trainer":
+		_run_trainer_battle()
 	else:
 		_run_generic_flow()
+
+func _run_trainer_battle() -> void:
+	if trainer_path.is_empty():
+		_player.unfreeze()
+		return
+	EncounterContext.begin_trainer_battle(load(trainer_path))
 
 func _run_generic_flow() -> void:
 	if dialogue_lines.is_empty():

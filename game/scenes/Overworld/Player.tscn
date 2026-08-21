@@ -34,6 +34,7 @@ size = Vector2(10, 13)
 size = Vector2(8, 8)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("2_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

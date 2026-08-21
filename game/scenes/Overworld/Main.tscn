@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="PackedScene" path="res://scenes/Overworld/OverworldMap.tscn" id="1_map"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="7_building_tex"]
 [ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="8_nurse"]
 [ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="9_start_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Trainer.tscn" id="10_trainer"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("3_script")
@@ -29,6 +30,18 @@ position = Vector2(240, 160)
 
 [node name="EncounterZone" parent="." instance=ExtResource("6_encounter")]
 position = Vector2(352, 80)
+
+[node name="MeadowScout" parent="." instance=ExtResource("10_trainer")]
+position = Vector2(80, 144)
+trainer_path = "res://data/trainers/meadow_scout.tres"
+
+[node name="BridgeKeeper" parent="." instance=ExtResource("10_trainer")]
+position = Vector2(240, 176)
+trainer_path = "res://data/trainers/bridge_keeper.tres"
+
+[node name="SnowRanger" parent="." instance=ExtResource("10_trainer")]
+position = Vector2(368, 80)
+trainer_path = "res://data/trainers/snow_ranger.tres"
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
