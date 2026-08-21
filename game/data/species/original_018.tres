@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "pyrova"
+dex_number = 18
+display_name = "Pyrova"
+base_hp = 65
+base_attack = 64
+base_defense = 36
+base_special_attack = 60
+base_special_defense = 54
+base_speed = 42
+type_id = "fire"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

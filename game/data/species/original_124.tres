@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "chimelet"
+dex_number = 124
+display_name = "Chimelet"
+base_hp = 38
+base_attack = 66
+base_defense = 38
+base_special_attack = 62
+base_special_defense = 58
+base_speed = 40
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

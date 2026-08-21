@@ -3,6 +3,8 @@ extends TrainerController
 ## Picks whichever move currently deals the most expected damage.
 
 func choose_action(actor: BattleCombatant, opponent: BattleCombatant) -> Dictionary:
+	if actor.moves.is_empty():
+		return {"type": "no_move"}
 	var best_index := 0
 	var best_damage := -1
 	for i in range(actor.moves.size()):

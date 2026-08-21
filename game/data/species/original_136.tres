@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "platilisk"
+dex_number = 136
+display_name = "Platilisk"
+base_hp = 56
+base_attack = 54
+base_defense = 62
+base_special_attack = 50
+base_special_defense = 45
+base_speed = 39
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

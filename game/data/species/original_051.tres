@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "shadel"
+dex_number = 51
+display_name = "Shadel"
+base_hp = 37
+base_attack = 49
+base_defense = 57
+base_special_attack = 45
+base_special_defense = 57
+base_speed = 70
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

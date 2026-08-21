@@ -79,6 +79,30 @@ function paintNurse(x, y) {
 	return null;
 }
 
+function makeActorSheet(paintFn, fileName) {
+	const frameWidth = 16;
+	const frameHeight = 16;
+	const sheet = new Canvas(frameWidth * 4, frameHeight);
+	for (let frame = 0; frame < 4; frame++) {
+		for (let y = 0; y < frameHeight; y++) {
+			for (let x = 0; x < frameWidth; x++) {
+				const color = paintFn(x, y);
+				if (color) sheet.setPixel(frame * frameWidth + x, y, color);
+			}
+		}
+		// Shift the lower body by one pixel on the passing frames to create a
+		// readable walk rhythm without changing the actor's collision footprint.
+		if (frame === 1 || frame === 3) {
+			for (const x of [5, 6, 9, 10]) {
+				const source = sheet.getPixel(frame * frameWidth + x, 13);
+				sheet.setPixel(frame * frameWidth + x, 13, [0, 0, 0, 0]);
+				sheet.setPixel(frame * frameWidth + x, 14, source);
+			}
+		}
+	}
+	sheet.writePNG(path.join(OUT_DIR, fileName));
+}
+
 // --- Battle creatures: shared round-body silhouette, neutral-toned so BattleState's
 // per-type modulate tint (fire/water/grass/normal) reads clearly on any of them.
 // Each species gets a distinct "topper" (ears/leaf/fin) so they're recognizable even
@@ -165,13 +189,8 @@ function makeCreature(topperFn, fileName) {
 	c.writePNG(path.join(OUT_DIR, fileName));
 }
 
-const player = new Canvas(16, 16);
-player.forEach((x, y, c) => { const col = paintPlayer(x, y); if (col) c.setPixel(x, y, col); });
-player.writePNG(path.join(OUT_DIR, 'player_overworld.png'));
-
-const nurse = new Canvas(16, 16);
-nurse.forEach((x, y, c) => { const col = paintNurse(x, y); if (col) c.setPixel(x, y, col); });
-nurse.writePNG(path.join(OUT_DIR, 'nurse_npc.png'));
+makeActorSheet(paintPlayer, 'player_overworld.png');
+makeActorSheet(paintNurse, 'nurse_npc.png');
 
 makeCreature(roundEars, 'creature_placeholder.png');
 makeCreature(pointedEars, 'emberkit.png');

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "funglow"
+dex_number = 84
+display_name = "Funglow"
+base_hp = 40
+base_attack = 70
+base_defense = 42
+base_special_attack = 66
+base_special_defense = 60
+base_speed = 57
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

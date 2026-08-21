@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "zephyroo"
+dex_number = 44
+display_name = "Zephyroo"
+base_hp = 42
+base_attack = 38
+base_defense = 46
+base_special_attack = 70
+base_special_defense = 62
+base_speed = 74
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

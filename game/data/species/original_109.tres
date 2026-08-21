@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "ravengale"
+dex_number = 109
+display_name = "Ravengale"
+base_hp = 62
+base_attack = 63
+base_defense = 35
+base_special_attack = 59
+base_special_defense = 51
+base_speed = 72
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

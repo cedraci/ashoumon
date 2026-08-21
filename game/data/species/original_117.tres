@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "mallowisp"
+dex_number = 117
+display_name = "Mallowisp"
+base_hp = 43
+base_attack = 55
+base_defense = 63
+base_special_attack = 51
+base_special_defense = 63
+base_speed = 44
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

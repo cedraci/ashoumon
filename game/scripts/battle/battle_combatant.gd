@@ -5,6 +5,7 @@ extends RefCounted
 
 var species: Species
 var level: int
+var experience: int = 0
 var moves: Array = []  # Array of Move
 var nickname: String = ""
 var max_hp: int
@@ -32,8 +33,35 @@ func get_attack() -> int:
 func get_defense() -> int:
 	return _calc_stat(species.base_defense, false)
 
+func get_special_attack() -> int:
+	return _calc_stat(species.base_special_attack, false)
+
+func get_special_defense() -> int:
+	return _calc_stat(species.base_special_defense, false)
+
 func get_speed() -> int:
 	return _calc_stat(species.base_speed, false)
+
+func experience_to_next_level() -> int:
+	return level * 50
+
+func gain_experience(amount: int) -> int:
+	if amount <= 0:
+		return 0
+	experience += amount
+	var levels_gained: int = 0
+	while experience >= experience_to_next_level():
+		experience -= experience_to_next_level()
+		level += 1
+		_recalculate_stats()
+		levels_gained += 1
+	return levels_gained
+
+func _recalculate_stats() -> void:
+	var previous_max_hp := max_hp
+	max_hp = _calc_stat(species.base_hp, true)
+	if not is_fainted():
+		current_hp += max_hp - previous_max_hp
 
 func is_fainted() -> bool:
 	return current_hp <= 0

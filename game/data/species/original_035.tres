@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "rubblet"
+dex_number = 35
+display_name = "Rubblet"
+base_hp = 44
+base_attack = 65
+base_defense = 37
+base_special_attack = 61
+base_special_defense = 64
+base_speed = 44
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

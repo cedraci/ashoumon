@@ -21,6 +21,7 @@ var player_controller: TrainerController
 var enemy_controller: TrainerController
 var is_trainer_battle := false
 var trainer_data: Trainer = null
+var _participating_party: Array = []  # Array of BattleCombatant that were sent out
 
 const TYPE_TINTS := {
 	"fire": Color(1.0, 0.45, 0.3),
@@ -49,7 +50,7 @@ func _setup_wild_battle() -> void:
 
 	is_trainer_battle = false
 	battle_ended.connect(_on_battle_ended)
-	start_battle([GameState.get_lead()], [e], PlayerMenuController.new(self), ScriptedAIController.new())
+	start_battle(GameState.party, [e], PlayerMenuController.new(self), ScriptedAIController.new())
 
 func _setup_trainer_battle(trainer: Trainer) -> void:
 	trainer_data = trainer
@@ -101,6 +102,7 @@ func start_battle(p_player_party: Array, p_enemy_party: Array, p_player_controll
 		text_box.say(["There's nobody able to battle!"])
 		battle_ended.emit("enemy" if player_active == null else "player")
 		return
+	_record_participant(player_active)
 	_apply_tints()
 	_update_hud()
 	_run_battle()
@@ -170,7 +172,29 @@ func _run_battle() -> void:
 		await text_box.finished
 	text_box.say(["%s wins!" % ("Player" if player_has_more else "Enemy")])
 	await text_box.finished
+	if player_has_more:
+		await _award_experience()
 	battle_ended.emit("player" if player_has_more else "enemy")
+
+func _record_participant(member: BattleCombatant) -> void:
+	if member != null and not _participating_party.has(member):
+		_participating_party.append(member)
+
+func _award_experience() -> void:
+	var total_experience: int = 0
+	for defeated in enemy_party:
+		total_experience += defeated.level * 30
+	if total_experience <= 0 or _participating_party.is_empty():
+		return
+	var messages: Array = []
+	for member in _participating_party:
+		var old_level: int = member.level
+		member.gain_experience(total_experience)
+		messages.append("%s gained %d EXP!" % [member.get_display_name(), total_experience])
+		if member.level > old_level:
+			messages.append("%s grew to Lv %d!" % [member.get_display_name(), member.level])
+	text_box.say(messages)
+	await text_box.finished
 
 ## Returns a battle-ending outcome string ("caught"/"fled"), or "" if the battle continues.
 func _run_turn() -> String:
@@ -184,9 +208,20 @@ func _run_turn() -> String:
 		return "fled"
 
 	if player_action["type"] == "catch":
-		text_box.say(["You threw a ball..."])
+		var ball_id: String = String(player_action.get("ball_id", ""))
+		if ball_id == "":
+			text_box.say(["You have no balls left!"])
+			await text_box.finished
+			var no_ball_enemy_action: Dictionary = await enemy_controller.choose_action(enemy_active, player_active)
+			await _execute_action(enemy_active, player_active, no_ball_enemy_action)
+			return ""
+		if not GameState.consume_ball(ball_id):
+			text_box.say(["You don't have that ball anymore!"])
+			await text_box.finished
+			return ""
+		text_box.say(["You threw a %s..." % CatchMechanic.get_ball_display_name(ball_id)])
 		await text_box.finished
-		if CatchMechanic.attempt_catch(enemy_active):
+		if CatchMechanic.attempt_catch(enemy_active, ball_id):
 			text_box.say(["Gotcha! %s was caught!" % enemy_active.get_display_name()])
 			await text_box.finished
 			NicknamePolicy.maybe_prompt(enemy_active)
@@ -221,6 +256,7 @@ func _handle_switch_ins() -> void:
 	var new_player_active := _next_active(player_party)
 	if new_player_active != player_active:
 		player_active = new_player_active
+		_record_participant(player_active)
 		_apply_tints()
 		_update_hud()
 		text_box.say(["Go, %s!" % player_active.get_display_name()])
@@ -236,13 +272,23 @@ func _handle_switch_ins() -> void:
 		await text_box.finished
 
 func _execute_action(actor: BattleCombatant, target: BattleCombatant, action: Dictionary) -> void:
-	var move: Move = actor.moves[action["move_index"]]
+	if action.get("type", "") == "no_move":
+		text_box.say(["%s has no usable moves and struggles!" % actor.get_display_name()])
+		await text_box.finished
+		target.apply_damage(max(1, int(actor.get_attack() / 2.0)))
+		_update_hud()
+		return
+	var move_index: int = action.get("move_index", -1)
+	if move_index < 0 or move_index >= actor.moves.size():
+		push_warning("BattleState: ignoring invalid move action for %s." % actor.get_display_name())
+		return
+	var move: Move = actor.moves[move_index]
 	text_box.say(["%s used %s!" % [actor.get_display_name(), move.display_name]])
 	await text_box.finished
 	var damage := DamageCalc.compute_damage(actor, target, move)
 	target.apply_damage(damage)
 	_update_hud()
-	var mult := TypeChart.get_multiplier(move.type_id, target.species.type_id)
+	var mult: float = TypeChart.get_multiplier(move.type_id, target.species.type_id)
 	if mult > 1.0:
 		text_box.say(["It's super effective!"])
 		await text_box.finished

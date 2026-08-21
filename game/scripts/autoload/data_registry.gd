@@ -27,5 +27,14 @@ func _index(dir_path: String, out_dict: Dictionary) -> void:
 func get_species(id: String) -> Species:
 	return _species_by_id.get(id)
 
+func get_all_species() -> Array:
+	var species := _species_by_id.values()
+	species.sort_custom(func(a, b):
+		if a.dex_number == b.dex_number:
+			return a.display_name < b.display_name
+		return a.dex_number < b.dex_number
+	)
+	return species
+
 func get_move(id: String) -> Move:
 	return _moves_by_id.get(id)

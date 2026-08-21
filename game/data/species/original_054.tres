@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "gloombat"
+dex_number = 54
+display_name = "Gloombat"
+base_hp = 57
+base_attack = 64
+base_defense = 36
+base_special_attack = 60
+base_special_defense = 46
+base_speed = 39
+type_id = "fire"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

@@ -8,6 +8,8 @@ const MAP_WIDTH := 30
 const MAP_HEIGHT := 20
 const GRASS_COORDS := Vector2i(0, 0)
 const WALL_COORDS := Vector2i(1, 0)
+const PATH_COORDS := Vector2i(2, 0)
+const FLOWER_COORDS := Vector2i(3, 0)
 
 const OBSTACLES := [
 	Rect2i(5, 3, 3, 3),
@@ -32,6 +34,8 @@ func _build_tileset() -> void:
 	atlas_source.texture_region_size = Vector2i(TILE_SIZE, TILE_SIZE)
 	atlas_source.create_tile(GRASS_COORDS)
 	atlas_source.create_tile(WALL_COORDS)
+	atlas_source.create_tile(PATH_COORDS)
+	atlas_source.create_tile(FLOWER_COORDS)
 
 	var tile_set := TileSet.new()
 	tile_set.tile_size = Vector2i(TILE_SIZE, TILE_SIZE)
@@ -61,7 +65,11 @@ func _paint_map() -> void:
 				if rect.has_point(Vector2i(x, y)):
 					in_obstacle = true
 					break
-			var coords := WALL_COORDS if (is_border or in_obstacle) else GRASS_COORDS
+			var is_path := y == 10 or x == 10
+			var is_flower := not is_path and not is_border and not in_obstacle \
+				and ((x * 7 + y * 11) % 37 == 0)
+			var coords := WALL_COORDS if (is_border or in_obstacle) \
+				else PATH_COORDS if is_path else FLOWER_COORDS if is_flower else GRASS_COORDS
 			tile_map_layer.set_cell(Vector2i(x, y), _source_id, coords)
 
 func map_pixel_size() -> Vector2i:

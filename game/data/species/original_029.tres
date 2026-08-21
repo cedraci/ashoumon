@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "dewlisk"
+dex_number = 29
+display_name = "Dewlisk"
+base_hp = 35
+base_attack = 35
+base_defense = 43
+base_special_attack = 67
+base_special_defense = 55
+base_speed = 65
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

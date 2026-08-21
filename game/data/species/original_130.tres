@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "aurorling"
+dex_number = 130
+display_name = "Aurorling"
+base_hp = 47
+base_attack = 60
+base_defense = 68
+base_special_attack = 56
+base_special_defense = 36
+base_speed = 60
+type_id = "fire"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

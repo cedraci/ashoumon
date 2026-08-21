@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "toadstooly"
+dex_number = 88
+display_name = "Toadstooly"
+base_hp = 46
+base_attack = 66
+base_defense = 38
+base_special_attack = 62
+base_special_defense = 35
+base_speed = 43
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

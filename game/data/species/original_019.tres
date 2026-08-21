@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "coalisk"
+dex_number = 19
+display_name = "Coalisk"
+base_hp = 51
+base_attack = 45
+base_defense = 53
+base_special_attack = 41
+base_special_defense = 40
+base_speed = 59
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

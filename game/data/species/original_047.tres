@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "cirrella"
+dex_number = 47
+display_name = "Cirrella"
+base_hp = 62
+base_attack = 53
+base_defense = 61
+base_special_attack = 49
+base_special_defense = 51
+base_speed = 43
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

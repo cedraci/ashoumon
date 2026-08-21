@@ -8,5 +8,6 @@ id = "ember"
 display_name = "Ember"
 type_id = "fire"
 power = 40
+damage_class = "special"
 accuracy = 100
 priority = 0

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "puddlefin"
+dex_number = 25
+display_name = "Puddlefin"
+base_hp = 60
+base_attack = 39
+base_defense = 47
+base_special_attack = 35
+base_special_defense = 49
+base_speed = 38
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

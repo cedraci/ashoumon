@@ -8,5 +8,6 @@ id = "vine_snap"
 display_name = "Vine Snap"
 type_id = "grass"
 power = 40
+damage_class = "special"
 accuracy = 100
 priority = 0

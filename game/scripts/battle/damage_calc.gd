@@ -5,8 +5,8 @@ extends RefCounted
 static func compute_damage(attacker: BattleCombatant, defender: BattleCombatant, move: Move) -> int:
 	if move.power <= 0:
 		return 0
-	var atk := attacker.get_attack()
-	var df := defender.get_defense()
+	var atk := attacker.get_special_attack() if move.damage_class == "special" else attacker.get_attack()
+	var df := defender.get_special_defense() if move.damage_class == "special" else defender.get_defense()
 	var base := ((2.0 * attacker.level / 5.0 + 2.0) * move.power * atk / df) / 50.0 + 2.0
 	var stab := 1.5 if move.type_id == attacker.species.type_id else 1.0
 	var type_mult := TypeChart.get_multiplier(move.type_id, defender.species.type_id)

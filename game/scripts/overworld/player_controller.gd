@@ -27,6 +27,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = input_vector * SPEED
 	move_and_slide()
+	GameState.overworld_position = global_position
 
 	interact_zone.position = Vector2(facing.x, facing.y) * TILE_SIZE
 
@@ -50,3 +51,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func unfreeze() -> void:
 	_frozen = false
+
+func freeze() -> void:
+	_frozen = true
+
+func is_frozen() -> bool:
+	return _frozen

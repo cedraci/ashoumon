@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "brightail"
+dex_number = 65
+display_name = "Brightail"
+base_hp = 58
+base_attack = 35
+base_defense = 43
+base_special_attack = 67
+base_special_defense = 47
+base_speed = 62
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

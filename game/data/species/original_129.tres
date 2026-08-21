@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "stellune"
+dex_number = 129
+display_name = "Stellune"
+base_hp = 61
+base_attack = 43
+base_defense = 51
+base_special_attack = 39
+base_special_defense = 50
+base_speed = 43
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

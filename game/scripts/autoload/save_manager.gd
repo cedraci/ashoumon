@@ -12,6 +12,7 @@ func save_game() -> void:
 	var data := {
 		"version": SAVE_VERSION,
 		"party": _serialize_party(),
+		"bag": GameState.bag,
 	}
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data))
@@ -26,6 +27,7 @@ func _serialize_party() -> Array:
 		out.append({
 			"species_id": member.species.id,
 			"level": member.level,
+			"experience": member.experience,
 			"current_hp": member.current_hp,
 			"nickname": member.nickname,
 			"permanently_fainted": member.permanently_fainted,
@@ -45,23 +47,55 @@ func load_game() -> bool:
 		return false
 	if parsed.get("version", 0) != SAVE_VERSION:
 		return false
-	GameState.party = _deserialize_party(parsed["party"])
+	if typeof(parsed["party"]) != TYPE_ARRAY:
+		return false
+	var loaded_party = _deserialize_party(parsed["party"])
+	if loaded_party == null:
+		return false
+	GameState.party = loaded_party
+	if typeof(parsed.get("bag", {})) == TYPE_DICTIONARY:
+		GameState.bag = parsed.get("bag", {}).duplicate()
 	return true
 
-func _deserialize_party(entries: Array) -> Array:
+func _deserialize_party(entries: Array):
+	if entries.size() > 10:
+		return null
 	var party := []
 	for entry in entries:
+		if typeof(entry) != TYPE_DICTIONARY:
+			return null
+		if not entry.has_all(["species_id", "level", "current_hp", "move_ids"]):
+			return null
+		if typeof(entry["species_id"]) != TYPE_STRING \
+		or typeof(entry["level"]) != TYPE_INT \
+		or typeof(entry["current_hp"]) != TYPE_INT \
+		or typeof(entry["move_ids"]) != TYPE_ARRAY:
+			return null
+		if entry["level"] < 1:
+			return null
 		var species: Species = DataRegistry.get_species(entry["species_id"])
 		if species == null:
-			continue
+			return null
 		var moves := []
 		for move_id in entry["move_ids"]:
+			if typeof(move_id) != TYPE_STRING:
+				return null
 			var move: Move = DataRegistry.get_move(move_id)
 			if move != null:
 				moves.append(move)
+			else:
+				return null
 		var combatant := BattleCombatant.new(species, entry["level"], moves)
-		combatant.current_hp = entry["current_hp"]
-		combatant.nickname = entry.get("nickname", "")
-		combatant.permanently_fainted = entry.get("permanently_fainted", false)
+		var experience = entry.get("experience", 0)
+		if typeof(experience) != TYPE_INT or experience < 0:
+			return null
+		combatant.experience = min(experience, combatant.experience_to_next_level() - 1)
+		combatant.current_hp = clampi(entry["current_hp"], 0, combatant.max_hp)
+		var nickname = entry.get("nickname", "")
+		var permanently_fainted = entry.get("permanently_fainted", false)
+		if typeof(nickname) != TYPE_STRING or typeof(permanently_fainted) != TYPE_BOOL:
+			return null
+		combatant.nickname = nickname
+		combatant.permanently_fainted = permanently_fainted
 		party.append(combatant)
 	return party

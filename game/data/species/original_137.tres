@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "ironbud"
+dex_number = 137
+display_name = "Ironbud"
+base_hp = 42
+base_attack = 35
+base_defense = 43
+base_special_attack = 67
+base_special_defense = 62
+base_speed = 56
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

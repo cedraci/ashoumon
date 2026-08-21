@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "moldrill"
+dex_number = 85
+display_name = "Moldrill"
+base_hp = 57
+base_attack = 51
+base_defense = 59
+base_special_attack = 47
+base_special_defense = 46
+base_speed = 74
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

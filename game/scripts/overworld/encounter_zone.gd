@@ -10,7 +10,8 @@ extends Area2D
 
 func _ready() -> void:
 	if species_pool.is_empty():
-		species_pool = [load("res://data/species/ripplet.tres"), load("res://data/species/leaflet.tres")]
+		for species in DataRegistry.get_all_species():
+			species_pool.append(species as Species)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	timer.timeout.connect(_on_timer_timeout)

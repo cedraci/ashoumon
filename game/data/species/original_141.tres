@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "driplume"
+dex_number = 141
+display_name = "Driplume"
+base_hp = 48
+base_attack = 67
+base_defense = 39
+base_special_attack = 63
+base_special_defense = 37
+base_speed = 42
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

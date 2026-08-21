@@ -16,7 +16,7 @@ func _init(p_battle_state: Node) -> void:
 func choose_action(actor: BattleCombatant, opponent: BattleCombatant) -> Dictionary:
 	var move_names: Array = []
 	for m in actor.moves:
-		move_names.append(m.display_name)
+		move_names.append("%s [%s]" % [m.display_name, m.damage_class.capitalize()])
 
 	battle_state.show_vote_countdown(VOTE_DURATION, move_names)
 	var choice: int = await TwitchChatClient.run_vote(actor.moves.size(), VOTE_DURATION)

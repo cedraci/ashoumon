@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "quarron"
+dex_number = 39
+display_name = "Quarron"
+base_hp = 50
+base_attack = 61
+base_defense = 69
+base_special_attack = 57
+base_special_defense = 39
+base_speed = 71
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

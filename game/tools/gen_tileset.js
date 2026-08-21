@@ -16,6 +16,7 @@ const PALETTE = {
 	FOREST_LIGHT: [140, 191, 130, 255],
 	OUTLINE: [56, 40, 32, 255],
 	SHADOW: [150, 112, 78, 255],
+	SAND: [219, 193, 133, 255],
 	SAND_DARK: [176, 140, 92, 255],
 };
 
@@ -43,6 +44,18 @@ function paintGrass(x, y) {
 	return PALETTE.FOREST;
 }
 
+function paintPath(x, y) {
+	if ((x + y) % 7 === 0 || (x * 3 + y) % 11 === 0) return PALETTE.SAND_DARK;
+	return PALETTE.SAND;
+}
+
+function paintFlower(x, y) {
+	const grass = paintGrass(x, y);
+	if ((x === 7 && y === 5) || (x === 8 && y === 5)) return PALETTE.SAND;
+	if ((x === 7 && y === 6) || (x === 8 && y === 6)) return PALETTE.SAND_DARK;
+	return grass;
+}
+
 // Tree: rounded dark-outlined canopy over a short trunk, on a grass background so
 // it blends with neighboring grass cells on the same TileMapLayer (this tile fully
 // replaces a cell rather than layering on top of it).
@@ -66,7 +79,9 @@ function paintTree(x, y) {
 	return paintGrass(x, y);
 }
 
-const atlas = new Canvas(TILE * 2, TILE);
+const atlas = new Canvas(TILE * 4, TILE);
 paintTile(atlas, 0, 0, paintGrass);
 paintTile(atlas, 1, 0, paintTree);
+paintTile(atlas, 2, 0, paintPath);
+paintTile(atlas, 3, 0, paintFlower);
 atlas.writePNG(OUT_FILE);

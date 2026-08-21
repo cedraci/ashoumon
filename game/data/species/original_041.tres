@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "breezlet"
+dex_number = 41
+display_name = "Breezlet"
+base_hp = 53
+base_attack = 59
+base_defense = 67
+base_special_attack = 55
+base_special_defense = 42
+base_speed = 64
+type_id = "grass"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

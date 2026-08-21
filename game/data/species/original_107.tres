@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "brutalon"
+dex_number = 107
+display_name = "Brutalon"
+base_hp = 59
+base_attack = 65
+base_defense = 37
+base_special_attack = 61
+base_special_defense = 48
+base_speed = 38
+type_id = "water"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

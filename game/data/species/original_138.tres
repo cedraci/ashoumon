@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "chromite"
+dex_number = 138
+display_name = "Chromite"
+base_hp = 59
+base_attack = 52
+base_defense = 60
+base_special_attack = 48
+base_special_defense = 48
+base_speed = 73
+type_id = "fire"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

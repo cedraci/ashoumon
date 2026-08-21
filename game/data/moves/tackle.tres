@@ -8,5 +8,6 @@ id = "tackle"
 display_name = "Tackle"
 type_id = "normal"
 power = 35
+damage_class = "physical"
 accuracy = 100
 priority = 0

@@ -84,7 +84,7 @@ scale up as it gains levels (leveling isn't implemented yet as its own
 system, but the underlying level number already affects how strong a
 creature is in battle).
 
-You can hold up to **6 creatures** at a time. Whichever one in your lineup
+You can hold up to **10 creatures** at a time. Whichever one in your lineup
 isn't fainted comes out first in battle; if it faints, whichever comes next
 in your lineup automatically steps in.
 
@@ -104,6 +104,15 @@ rock-paper-scissors:
 A creature using a move of its own type also hits a bit harder ("same-type
 attack bonus"), just like the games this is inspired by.
 
+Moves are either **Physical** or **Special**. Physical moves use the user's
+Attack against the target's Defense. Special moves use Special Attack against
+Special Defense. The move-selection screen shows each move's category in
+brackets, and the Pokemon team view shows both pairs of stats.
+
+After winning a battle, every creature that was sent out during that fight earns
+experience. Creatures that stayed in the lineup but were never sent out do not
+receive experience. Experience is awarded after the victory message, and a level
+up immediately recalculates the creature's HP, Attack, Defense, and Speed.
 ---
 
 ## 6. Battling
@@ -145,16 +154,22 @@ or to advance to the next line once one finishes.
 
 When you choose **Catch**, the game rolls the odds based on two things:
 
-- **How low the wild creature's HP is** — the closer to fainting, the easier
   it is to catch. Full-health creatures are quite hard to catch; a creature
   down to a sliver of HP is much more likely to succeed.
-- **The creature's own "catch rate"** — some creatures are just naturally
   easier or harder to catch than others (this is set per-species; right now
   all three starter-style creatures use the same middling rate).
 
 If the catch fails, you'll see "Oh no! It broke free!" and the wild creature
 gets to attack you before your next turn. If it succeeds, that creature joins
-your team immediately (as long as you have a free slot out of your 6).
+your team immediately (as long as you have a free slot out of your 10).
+
+Your bag starts with 100 Pokeballs, 100 Superballs, and 100 Hyperballs. When you
+choose **Catch** in battle, a second menu lists the ball types you currently
+have and their counts. Choose the ball you want to throw; Escape returns to the
+main battle menu. One ball is consumed on every throw, whether the attempt
+succeeds or fails. The Bag screen in the Start Menu shows the remaining counts.
+Ball strength and the improved catch-rate tuning make weakened wild creatures
+substantially easier to catch.
 
 ---
 
@@ -169,6 +184,11 @@ her so you're facing her, then press **Enter** or **Space** (the same button
 you use to advance dialogue and confirm menu choices). She'll greet you and
 ask whether you'd like her to heal your party:
 
+Open the overworld Start Menu with **Enter**, choose **Pokemon**, and the team
+view shows a compact selectable roster. Choose a creature with the arrow keys
+and Enter, or click its row, to open its detail view with level, current/max HP,
+experience progress, Attack, Defense, Special Attack, Special Defense, Speed,
+and moves.
 - Choose **Yes** and your whole team is restored to full HP immediately, free,
   as many times as you like.
 - Choose **No** (or press **Escape** to back out — it counts the same as "No")

@@ -8,5 +8,6 @@ id = "water_jet"
 display_name = "Water Jet"
 type_id = "water"
 power = 40
+damage_class = "special"
 accuracy = 100
 priority = 0

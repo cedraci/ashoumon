@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "umbrakit"
+dex_number = 56
+display_name = "Umbrakit"
+base_hp = 60
+base_attack = 62
+base_defense = 70
+base_special_attack = 58
+base_special_defense = 49
+base_speed = 73
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

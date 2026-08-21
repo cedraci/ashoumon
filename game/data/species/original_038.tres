@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "stoneling"
+dex_number = 38
+display_name = "Stoneling"
+base_hp = 64
+base_attack = 44
+base_defense = 52
+base_special_attack = 40
+base_special_defense = 53
+base_speed = 54
+type_id = "fire"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/species.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = "fumefang"
+dex_number = 20
+display_name = "Fumefang"
+base_hp = 37
+base_attack = 62
+base_defense = 70
+base_special_attack = 58
+base_special_defense = 57
+base_speed = 35
+type_id = "normal"
+catch_rate = 45
+sprite_path = "res://assets/sprites/creature_placeholder.png"
