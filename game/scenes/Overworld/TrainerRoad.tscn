@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Overworld/OverworldMap.tscn" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/overworld/main.gd" id="3_script"]
+[ext_resource type="PackedScene" path="res://scenes/UI/TextBox.tscn" id="4_textbox"]
+[ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="5_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/EncounterZone.tscn" id="6_encounter"]
+[ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="7_start_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Trainer.tscn" id="8_trainer"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="9_exit"]
+
+[node name="TrainerRoad" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="OverworldMap" parent="." instance=ExtResource("1_map")]
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(32, 160)
+[node name="TextBox" parent="." instance=ExtResource("4_textbox")]
+[node name="EncounterZone" parent="." instance=ExtResource("6_encounter")]
+position = Vector2(352, 80)
+
+[node name="MeadowScout" parent="." instance=ExtResource("8_trainer")]
+position = Vector2(128, 144)
+trainer_path = "res://data/trainers/meadow_scout.tres"
+[node name="BridgeKeeper" parent="." instance=ExtResource("8_trainer")]
+position = Vector2(240, 176)
+trainer_path = "res://data/trainers/bridge_keeper.tres"
+[node name="SnowRanger" parent="." instance=ExtResource("8_trainer")]
+position = Vector2(368, 80)
+trainer_path = "res://data/trainers/snow_ranger.tres"
+
+[node name="WestExit" parent="." instance=ExtResource("9_exit")]
+position = Vector2(32, 160)
+destination_scene = "res://scenes/Overworld/StartingMeadow.tscn"
+destination_position = Vector2(448, 160)
+[node name="TownExit" parent="." instance=ExtResource("9_exit")]
+position = Vector2(448, 160)
+destination_scene = "res://scenes/Overworld/Lumenbrook.tscn"
+destination_position = Vector2(32, 160)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="MenuList" parent="UILayer" instance=ExtResource("5_menu")]
+offset_left = 132.0
+offset_top = 56.0
+offset_right = 228.0
+offset_bottom = 120.0
+visible = false
+[node name="StartMenu" parent="UILayer" instance=ExtResource("7_start_menu")]
+visible = false

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/town_hall.png" id="1_hall"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upper"]
+size = Vector2(64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(24, 20)
+
+[node name="TownHall" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Facade" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("1_hall")
+
+[node name="UpperCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_upper")
+
+[node name="LeftDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-20, -23)
+shape = SubResource("RectangleShape2D_left")
+
+[node name="RightDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(20, -23)
+shape = SubResource("RectangleShape2D_left")

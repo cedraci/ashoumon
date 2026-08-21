@@ -9,7 +9,11 @@ extends Node2D
 @onready var player := $Player
 
 func _ready() -> void:
-	player.global_position = GameState.overworld_position
+	if GameState.pending_scene_position_valid:
+		player.global_position = GameState.pending_scene_position
+		GameState.pending_scene_position_valid = false
+	else:
+		player.global_position = GameState.overworld_position
 	# NPCs add themselves to "interactable" in their own _ready(), and Godot runs a
 	# child's _ready() before its parent's - so by the time this runs, every NPC in
 	# the scene is already registered. Wiring them generically means a new NPC just

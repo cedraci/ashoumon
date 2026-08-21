@@ -75,11 +75,25 @@ games like this.
 There's also a small red-roofed building in the field: that's the **Pokémon
 Center**, where you can heal your team for free. See section 8.
 
-The current route is **Frostmeadow Crossing**. Its southern meadow has tall
-grass and Mira, the Meadow Scout. A water channel and bridge divide the middle
-of the route, where Oren, the Bridge Keeper, is waiting. The northern section
-turns snowy and contains Syl, the Snow Ranger. Trees, barriers, flowers, snow,
-water, and the bridge are solid or decorative according to their tile type.
+The world now follows three connected maps. **Starting Meadow** contains the
+initial Pokémon Center and encounter grass. The next map is **Frostmeadow
+Crossing**, a trainer road with Mira, Oren, and Syl, plus water, a bridge,
+barriers, and a snowy northern section. The road leads into **Lumenbrook**, the
+plaza town with its Town Hall, fountain, Healing Center, Supply Shop, and
+residents. Use the map exits at the edges of each route to travel between them.
+
+The separate **Lumenbrook** town layout now includes a Healing Center and a
+Supply Shop around its plaza. The Healing Center reuses the nurse's party-heal
+flow. The Supply Shop currently shows live ball stock; buying items will be
+added with the future money and shop system.
+
+Lumenbrook also has three residents to talk to: a plaza guide, a riverside
+local, and a garden caretaker. Face a resident and press **Enter** to read their
+dialogue.
+
+Standard small houses now have reusable doors. Face a door and press **Enter**
+to enter the shared house interior; use the interior exit door to return to the
+same exterior position.
 
 ---
 

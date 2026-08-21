@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/player_overworld.png" id="1_sprite"]
+[ext_resource type="Script" path="res://scripts/overworld/npc_controller.gd" id="2_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(10, 13)
+
+[node name="Shopkeeper" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("2_script")
+npc_type = "shop"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+texture = ExtResource("1_sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_1")

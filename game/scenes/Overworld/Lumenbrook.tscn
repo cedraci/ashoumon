@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Overworld/LumenbrookMap.tscn" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/overworld/main.gd" id="3_script"]
+[ext_resource type="PackedScene" path="res://scenes/UI/TextBox.tscn" id="4_textbox"]
+[ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="5_menu"]
+[ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="6_start_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="7_exit"]
+
+[node name="Lumenbrook" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="LumenbrookMap" parent="." instance=ExtResource("1_map")]
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(32, 160)
+[node name="TextBox" parent="." instance=ExtResource("4_textbox")]
+
+[node name="RoadExit" parent="." instance=ExtResource("7_exit")]
+position = Vector2(48, 160)
+destination_scene = "res://scenes/Overworld/TrainerRoad.tscn"
+destination_position = Vector2(448, 160)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="MenuList" parent="UILayer" instance=ExtResource("5_menu")]
+offset_left = 132.0
+offset_top = 56.0
+offset_right = 228.0
+offset_bottom = 120.0
+visible = false
+[node name="StartMenu" parent="UILayer" instance=ExtResource("6_start_menu")]
+visible = false

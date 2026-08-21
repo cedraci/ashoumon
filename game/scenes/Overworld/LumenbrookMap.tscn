@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/overworld/lumenbrook_map.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/TownHall.tscn" id="2_hall"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Fountain.tscn" id="3_fountain"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/HealingCenter.tscn" id="4_center"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Shop.tscn" id="5_shop"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/TownNPC.tscn" id="6_npc"]
+[ext_resource type="Script" path="res://scripts/overworld/day_night_cycle.gd" id="7_cycle"]
+
+[node name="LumenbrookMap" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="TownHall" parent="." instance=ExtResource("2_hall")]
+position = Vector2(144, 128)
+
+[node name="Fountain" parent="." instance=ExtResource("3_fountain")]
+position = Vector2(224, 176)
+
+[node name="HealingCenter" parent="." instance=ExtResource("4_center")]
+position = Vector2(80, 240)
+
+[node name="Shop" parent="." instance=ExtResource("5_shop")]
+position = Vector2(368, 240)
+
+[node name="PlazaGuide" parent="." instance=ExtResource("6_npc")]
+position = Vector2(304, 176)
+dialogue_lines = Array[String](["Welcome to Lumenbrook!", "The fountain marks the heart of town."])
+
+[node name="RiversideLocal" parent="." instance=ExtResource("6_npc")]
+position = Vector2(336, 80)
+dialogue_lines = Array[String](["The stream runs clear after snowfall.", "The northern path is beautiful at dawn."])
+
+[node name="GardenCaretaker" parent="." instance=ExtResource("6_npc")]
+position = Vector2(64, 176)
+dialogue_lines = Array[String](["Please tread gently near the flower beds.", "Every garden has its own little season."])
+
+[node name="DayNightCycle" type="CanvasModulate" parent="."]
+script = ExtResource("7_cycle")
+time_of_day = 0.5

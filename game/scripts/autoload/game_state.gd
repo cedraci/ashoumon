@@ -5,6 +5,10 @@ extends Node
 var party: Array = []  # Array of BattleCombatant
 var bag: Dictionary = {}
 var overworld_position := Vector2(240, 160)
+var return_scene_path := "res://scenes/Overworld/Main.tscn"
+var return_position := Vector2(240, 160)
+var pending_scene_position := Vector2.ZERO
+var pending_scene_position_valid := false
 
 const DEFAULT_BALL_COUNTS := {
 	"poke_ball": 100,

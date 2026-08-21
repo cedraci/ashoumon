@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/house_small.png" id="1_house"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Shopkeeper.tscn" id="2_keeper"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upper"]
+size = Vector2(48, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_side"]
+size = Vector2(18, 17)
+
+[node name="Shop" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Facade" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+modulate = Color(1.0, 0.88, 0.82, 1.0)
+texture = ExtResource("1_house")
+
+[node name="UpperCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -33)
+shape = SubResource("RectangleShape2D_upper")
+
+[node name="LeftDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-15, -19)
+shape = SubResource("RectangleShape2D_side")
+
+[node name="RightDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(15, -19)
+shape = SubResource("RectangleShape2D_side")
+
+[node name="Shopkeeper" parent="." instance=ExtResource("2_keeper")]
+position = Vector2(0, 0)

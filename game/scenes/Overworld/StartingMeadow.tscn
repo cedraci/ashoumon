@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/Overworld/OverworldMap.tscn" id="1_map"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Player.tscn" id="2_player"]
+[ext_resource type="Script" path="res://scripts/overworld/main.gd" id="3_script"]
+[ext_resource type="PackedScene" path="res://scenes/UI/TextBox.tscn" id="4_textbox"]
+[ext_resource type="PackedScene" path="res://scenes/UI/MenuList.tscn" id="5_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/EncounterZone.tscn" id="6_encounter"]
+[ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="7_building"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="8_nurse"]
+[ext_resource type="PackedScene" path="res://scenes/UI/StartMenu.tscn" id="9_start_menu"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/Door.tscn" id="10_exit"]
+
+[node name="StartingMeadow" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="OverworldMap" parent="." instance=ExtResource("1_map")]
+
+[node name="PokeCenterBuilding" type="Sprite2D" parent="."]
+position = Vector2(136, 216)
+texture = ExtResource("7_building")
+
+[node name="NurseNPC" parent="." instance=ExtResource("8_nurse")]
+position = Vector2(136, 248)
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(240, 160)
+
+[node name="TextBox" parent="." instance=ExtResource("4_textbox")]
+[node name="EncounterZone" parent="." instance=ExtResource("6_encounter")]
+position = Vector2(352, 80)
+
+[node name="RoadExit" parent="." instance=ExtResource("10_exit")]
+position = Vector2(448, 160)
+destination_scene = "res://scenes/Overworld/TrainerRoad.tscn"
+destination_position = Vector2(32, 160)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="MenuList" parent="UILayer" instance=ExtResource("5_menu")]
+offset_left = 132.0
+offset_top = 56.0
+offset_right = 228.0
+offset_bottom = 120.0
+visible = false
+[node name="StartMenu" parent="UILayer" instance=ExtResource("9_start_menu")]
+visible = false

@@ -33,6 +33,8 @@ func interact() -> void:
 		_run_nurse_flow()
 	elif npc_type == "trainer":
 		_run_trainer_battle()
+	elif npc_type == "shop":
+		_run_shop_flow()
 	else:
 		_run_generic_flow()
 
@@ -41,6 +43,16 @@ func _run_trainer_battle() -> void:
 		_player.unfreeze()
 		return
 	EncounterContext.begin_trainer_battle(load(trainer_path))
+
+func _run_shop_flow() -> void:
+	var stock := [
+		"Pokeballs: %d" % GameState.bag.get("poke_ball", 0),
+		"Superballs: %d" % GameState.bag.get("super_ball", 0),
+		"Hyperballs: %d" % GameState.bag.get("hyper_ball", 0),
+	]
+	_text_box.say(["Welcome to the Lumenbrook Supply Shop!", "Current stock:"] + stock)
+	await _text_box.finished
+	_player.unfreeze()
 
 func _run_generic_flow() -> void:
 	if dialogue_lines.is_empty():

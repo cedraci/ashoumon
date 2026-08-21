@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/pokecenter_building.png" id="1_building"]
+[ext_resource type="PackedScene" path="res://scenes/Overworld/NPC.tscn" id="2_nurse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upper"]
+size = Vector2(48, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(18, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right"]
+size = Vector2(18, 16)
+
+[node name="HealingCenter" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Facade" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("1_building")
+
+[node name="UpperCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -38)
+shape = SubResource("RectangleShape2D_upper")
+
+[node name="LeftDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-15, -20)
+shape = SubResource("RectangleShape2D_left")
+
+[node name="RightDoorCollision" type="CollisionShape2D" parent="."]
+position = Vector2(15, -20)
+shape = SubResource("RectangleShape2D_right")
+
+[node name="Nurse" parent="." instance=ExtResource("2_nurse")]
+position = Vector2(0, 0)
